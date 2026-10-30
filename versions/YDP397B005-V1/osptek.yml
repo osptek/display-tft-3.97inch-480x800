@@ -1,0 +1,10 @@
+id: YDP397B005-V1
+category: displays
+size: "3.97"
+panel: tft
+resolution: 480x800
+interface: [rgb]
+driver: ST7701S
+touch: null
+outline: 55.44 x 96.17 mm
+active_area: 51.84 x 86.40 mm

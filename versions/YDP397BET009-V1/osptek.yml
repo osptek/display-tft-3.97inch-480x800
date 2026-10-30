@@ -1,0 +1,10 @@
+id: YDP397BET009-V1
+category: displays
+size: "3.97"
+panel: tft
+resolution: 480x800
+interface: [mipi]
+driver: AXS15260D
+touch: null
+outline: 64.60 x 106.2 mm
+active_area: 51.84 x 86.40 mm
