@@ -1,0 +1,217 @@
+#include <dt-bindings/display/drm_mipi_dsi.h>
+#include <dt-bindings/input/rk-input.h>
+#include <dt-bindings/suspend/rockchip-rk3506.h>
+
+/ {
+	vcc_mipi_pwren: vcc-mipi_pwren-regulator {
+		compatible = "regulator-fixed";
+		regulator-boot-on;
+		regulator-always-on;
+		regulator-name = "vcc_mipi_pwren";
+		enable-active-high;
+		gpio = <&gpio1 RK_PB0 GPIO_ACTIVE_HIGH>;
+		pinctrl-name = "default";
+		pinctrl-0 = <&mipi_pwren_gpio>;
+	};
+};
+
+&dsi {
+	status = "okay";
+	//rockchip,lane-rate = <1000>;
+	dsi_panel: panel@0 {
+		status = "okay";
+		compatible = "simple-panel-dsi";
+		reg = <0>;
+		backlight = <&backlight>;
+		// power-supply = <&vcc3v3_lcd_n>;
+		// reset-gpio = <&gpio1 RK_PB0 GPIO_ACTIVE_LOW>;
+		reset-delay-ms = <10>;
+		enable-delay-ms = <10>;
+		prepare-delay-ms = <10>;
+		unprepare-delay-ms = <10>;
+		disable-delay-ms = <60>;
+		//width-mm = <68>;
+		//height-mm = <121>;
+		dsi,flags = <(MIPI_DSI_MODE_VIDEO | MIPI_DSI_MODE_VIDEO_BURST |
+				  MIPI_DSI_MODE_LPM | MIPI_DSI_MODE_NO_EOT_PACKET)>;
+		dsi,format = <MIPI_DSI_FMT_RGB888>;
+		dsi,lanes  = <2>;
+
+        // 3.97-inch AXS15260 (480x800)
+        panel-init-sequence = [
+        	/* BB */
+        	39 00 09 BB 00 00 00 00 00 00 5A A5
+        	/* F8 */
+        	39 00 03 F8 21 A0
+        	/* A0 */
+        	39 00 1E A0 00 10 00 02 00 00 04 FF 00 05 3A 3A 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 A0
+        	/* A1 (2-lane: A1[10] = 0x01) */
+        	39 00 17 A1 8F E5 11 AA 55 00 02 00 00 00 01 26 26 32 92 93 13 92 90 90 90 84
+        	/* A2 */
+        	39 00 27 A2 00 06 10 1C 12 06 14 00 00 00 00 00 FF 80 43 88 88 FF FF 20 90 00 20 90 00 E0 01 7F FF 00 00 00 00 00 E7 FF FF 00
+        	/* A4 */
+        	39 00 11 A4 85 85 92 82 AF AD AD 80 10 30 40 40 20 50 60 53
+        	/* B8 */
+        	39 00 1D B8 03 08 08 20 00 02 50 5E 1F 8F 40 00 03 00 83 90 90 90 90 90 90 90 90 90 90 90 90 90
+        	/* B9 */
+        	39 00 1F B9 64 34 78 32 AA 55 AA 00 00 00 F0 00 13 C8 00 10 27 C8 00 64 10 FF 14 07 1E 0A 00 00 00 00
+        	/* BA */
+        	39 00 17 BA 40 80 0E 10 0E 10 90 13 03 FF 04 22 00 00 00 00 00 00 00 00 00 30
+        	/* C1 */
+        	39 00 1F C1 72 04 02 02 71 05 18 00 02 00 01 01 43 FF FF 7F 4F 52 00 4F 52 00 54 3B 0B 04 06 FF FF 00
+        	/* C3 */
+        	39 00 03 C3 00 C0
+        	/* C4 */
+        	39 00 1F C4 02 02 C0 83 00 63 00 0C 03 0C 01 01 03 10 3E 06 9D 05 03 80 FE 10 10 00 0A 0A 48 48 84 A5
+        	/* C5 */
+        	39 00 18 C5 19 19 00 3E 30 3E 0D 30 30 10 88 19 19 19 19 19 19 6B 03 10 10 10 00
+        	/* C6 */
+        	39 00 20 C6 05 0A 05 0A C0 E0 2E 03 12 22 12 22 01 00 00 02 C8 22 FA E8 30 64 00 08 00 09 F0 00 00 F0 01
+        	/* C7 */
+        	39 00 2A C7 50 10 28 00 A2 00 4F 00 00 FF A8 99 9C 60 07 04 0C 0D 0E 0F 01 01 01 01 30 10 08 FF FF FF FF 03 00 00 00 00 00 00 00 00 00
+        	/* CF */
+        	39 00 20 CF 3C 1E 88 50 FF 18 16 18 16 0A 8C 3C 69 0E 6E 88 0C 0F 22 88 AA 55 04 04 91 A0 30 24 BB 01 00
+        	/* D0 */
+        	39 00 2D D0 00 00 01 24 08 05 30 01 FF 11 C1 C2 22 22 00 03 10 12 40 10 1E 51 15 00 FF 20 00 03 0D 16 A2 28 28 28 28 28 28 00 2F FF 0D 02 13 12
+        	/* D5 */
+        	39 00 28 D5 40 40 92 00 79 03 1C 7A 06 1C 7A 06 0B 01 00 4E 03 03 03 03 8A 01 03 00 20 53 2D 40 40 00 40 40 04 00 1F 69 1F 30 30
+        	/* D6 */
+        	39 00 2C D6 10 32 54 76 98 BA DC FE 02 00 01 83 22 2A 00 2B 23 00 40 40 40 40 03 30 00 88 08 28 01 00 00 00 00 00 00 00 00 12 00 00 00 00 20
+        	/* D7 */
+        	39 00 12 D7 1F 1F 1B 01 18 11 13 15 17 09 0B 0D 0F 18 1F 19 1F
+        	/* D8 */
+        	39 00 12 D8 1F 1F 1A 00 18 10 12 14 16 08 0A 0C 0E 18 1F 19 1F
+        	/* DF */
+        	39 00 08 DF 00 00 5B AB BB 2B 28
+        	/* E0 */
+        	39 00 21 E0 00 07 0F 16 19 1E 20 20 48 5E 73 76 84 98 A0 A7 B7 BD BB C9 D7 6A 67 69 6C 6E 6E 72 70 33 35 01
+        	/* E1 */
+        	39 00 22 E1 00 07 0F 16 19 1E 20 20 48 5E 73 76 84 98 A0 A7 B7 BD BB C9 D7 6A 67 69 6C 6E 6E 72 70 33 35 D6 33
+        	/* E7 */
+        	39 00 0F E7 20 03 E0 01 20 03 E0 01 FE 0F 00 08 CC 03
+        	/* E8 */
+        	39 00 17 E8 A9 05 00 00 00 00 01 01 22 30 0D 00 CF 20 00 FF 40 00 00 00 00 00
+        	/* E9 */
+        	39 00 17 E9 00 2B 02 00 02 03 00 B2 10 0E 60 14 05 81 01 06 05 00 80 07 08 07
+        	/* BB 清零 + delay 50ms */
+        	39 32 09 BB 00 00 00 00 00 00 00 00
+        	/* Sleep Out + delay 200ms */
+        	05 C8 01 11
+        	/* Display On + delay 200ms */
+        	05 C8 01 29
+        ];
+
+		disp_timings0: display-timings {
+			native-mode = <&dsi_timing0>;
+			dsi_timing0: timing0 {
+				clock-frequency = <35700000>;//60fps
+
+				hactive = <480>;
+				vactive = <800>;
+
+				vsync-len = <2>;
+				vback-porch = <20>;
+				vfront-porch = <125>;
+
+				hsync-len = <10>;
+				hback-porch = <70>;
+				hfront-porch = <70>;
+
+				vsync-active = <0>;
+				hsync-active = <0>;
+				de-active = <0>;
+				pixelclk-active = <0>;
+			};
+		};
+
+		ports {
+			#address-cells = <1>;
+			#size-cells = <0>;
+
+			port@0 {
+				reg = <0>;
+				panel_in_dsi: endpoint {
+					remote-endpoint = <&dsi_out_panel>;
+					status = "okay";
+				};
+			};
+		};
+	};
+
+	ports {
+		#address-cells = <1>;
+		#size-cells = <0>;
+
+		port@1 {
+			reg = <1>;
+			dsi_out_panel: endpoint {
+				remote-endpoint = <&panel_in_dsi>;
+			};
+		};
+	};
+};
+
+&display_subsystem {
+	status = "okay";
+	logo-memory-region = <&drm_logo>;
+};
+
+&vop {
+	status = "okay";
+};
+
+&dsi_in_vop {
+	status = "okay";
+};
+
+&rgb_in_vop {
+	status = "disabled";
+};
+
+&route_dsi {
+	status = "okay";
+	//logo,rotate = <3>;
+};
+
+&route_rgb {
+	status = "disabled";
+};
+
+&dsi_dphy {
+	status = "okay";
+};
+
+&backlight {
+	compatible = "pwm-backlight";
+	pwms = <&pwm0_4ch_2 0 10000 0>;
+	status = "okay";
+};
+
+// TOUCH
+&i2c2 {
+	status = "okay";
+	pinctrl-0 = <&rm_io4_i2c2_scl &rm_io5_i2c2_sda>;
+
+        axs15260: axs15260@3b {
+		status = "okay";
+		compatible = "axs,axs15260-touch";  /* 匹配 axs15260_of_match */
+		reg = <0x3b>;                     /* I2C 设备地址 */
+		pinctrl-names = "default";
+
+		touchscreen-size-x = <480>;       /* 匹配 3.97 寸 AXS15260 分辨率 */
+		touchscreen-size-y = <800>;
+
+		/* 坐标翻转/镜像（按需开启） */
+		// touchscreen-inverted-x;
+		// touchscreen-inverted-y;
+		// touchscreen-swapped-x-y;
+	 };
+};
+
+&pinctrl {
+	mipi_lcd{
+		mipi_pwren_gpio: mipi_pwren_gpio {
+			rockchip,pins = <1 RK_PB0 RK_FUNC_GPIO &pcfg_pull_none>;
+		};
+	};
+};
