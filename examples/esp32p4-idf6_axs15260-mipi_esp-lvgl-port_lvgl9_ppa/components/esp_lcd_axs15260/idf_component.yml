@@ -1,0 +1,6 @@
+dependencies:
+  cmake_utilities: 0.*
+  esp_lcd_touch:
+    public: true
+    version: ^1
+  idf: '>=5.3'
