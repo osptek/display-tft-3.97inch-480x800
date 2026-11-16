@@ -8,7 +8,7 @@ They are reference code; adjust pins, backlight, touch and other settings to you
 
 | 例程 / Project | 平台 / Platform | 驱动 IC / Driver IC | 接口 / Interface | 说明 / Description |
 |---|---|---|---|---|
-| [`3.97寸AXS15260-MIPI`](./3.97寸AXS15260-MIPI/) | Rockchip RK3506 | AXS15260 | MIPI | 设备树与触摸驱动参考 / device tree and touch driver reference |
+| [`rk3506-buildroot-axs15260-mipi-480x800`](./rk3506-buildroot-axs15260-mipi-480x800/) | Rockchip RK3506 | AXS15260 | MIPI | 设备树与触摸驱动参考 / device tree and touch driver reference |
 | [`axs15260-lcd-touch-480x800`](./axs15260-lcd-touch-480x800/) | Linux（DRM/KMS，vc4） | AXS15260 | MIPI DSI | 面板驱动与设备树 overlay、触摸驱动 / panel driver, device tree overlay and touch driver |
 | [`esp32p4-arduino-gc9503-lvgl`](./esp32p4-arduino-gc9503-lvgl/) | ESP32-P4 · Arduino | GC9503 | — | LVGL / LVGL |
 | [`esp32p4-gc9503cv-mipi`](./esp32p4-gc9503cv-mipi/) | ESP32-P4 · ESP-IDF | GC9503CV | MIPI | 显示驱动示例 / display driver demo |
@@ -16,5 +16,6 @@ They are reference code; adjust pins, backlight, touch and other settings to you
 | [`esp32p4-idf5_axs15260-mipi_esp-lvgl-port_lvgl9_ppa`](./esp32p4-idf5_axs15260-mipi_esp-lvgl-port_lvgl9_ppa/) | ESP32-P4 · ESP-IDF 5 | AXS15260 | MIPI | LVGL 9 移植示例（PPA）/ LVGL 9 port (PPA) |
 | [`esp32p4-idf6_axs15260-mipi_esp-lvgl-port_lvgl9`](./esp32p4-idf6_axs15260-mipi_esp-lvgl-port_lvgl9/) | ESP32-P4 · ESP-IDF 6 | AXS15260 | MIPI | LVGL 9 移植示例 / LVGL 9 port |
 | [`esp32p4-idf6_axs15260-mipi_esp-lvgl-port_lvgl9_ppa`](./esp32p4-idf6_axs15260-mipi_esp-lvgl-port_lvgl9_ppa/) | ESP32-P4 · ESP-IDF 6 | AXS15260 | MIPI | LVGL 9 移植示例（PPA）/ LVGL 9 port (PPA) |
+| [`esp32p4-idf6_axs15260-mipi-480x800_osptek-boot-anim_lvgl9`](./esp32p4-idf6_axs15260-mipi-480x800_osptek-boot-anim_lvgl9/) | ESP32-P4 · ESP-IDF 6 | AXS15260 | MIPI | 点屏测试 / 开机动画+防撕裂+lvgl9 / Boot animation + anti-tearing + LVGL 9 |
 
 如有问题请联系技术支持。 / Contact technical support if you have questions.

@@ -1,0 +1,17 @@
+{
+    "idf.currentSetup": "/home/jin/.espressif/v6.1/esp-idf",
+    "idf.openOcdConfigs": [
+        "board/esp32p4-builtin.cfg"
+    ],
+    "idf.customExtraVars": {
+        "IDF_TARGET": "esp32p4"
+    },
+    "clangd.path": "/home/jin/.espressif/tools/esp-clangd/esp-21.1.3_20260408/esp-clangd/bin/clangd",
+    "clangd.arguments": [
+      "--background-index",
+      "--query-driver=**",
+      "--compile-commands-dir=/home/jin/Projects/esp32p4-idf6_jd9366-mipi_esp-lvgl-adapter_lvgl9/build"
+    ],
+    "idf.flashType": "UART",
+    "idf.port": "/dev/ttyACM0"
+}
